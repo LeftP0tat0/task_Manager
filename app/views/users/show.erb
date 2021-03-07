@@ -1,0 +1,11 @@
+<h1><%=@user.username%></h1>
+
+<a href="/tasks/new">New Task</a>
+
+<ul>
+  <% @user.tasks.each do |task|%>
+  <li><%= task.content %> <a href="/tasks/<%=task.id%>/edit">EDIT</a></li>
+  <% end %>
+</ul>
+
+<a href="/logout">Log Out</a>

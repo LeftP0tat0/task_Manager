@@ -1,0 +1,10 @@
+<h3><%= @task.user.username %></h3>
+<p><%= @task.content%></p>
+
+<% #if @task.user == @user %>
+  <form method="post" action="/tasks/<%=@task.id%>/delete">
+    <input type="submit" value="Delete Task">
+  </form>
+  <br></br>
+  <a href="/tasks/<%=@task.id%>/edit">Edit Task</a>
+<% #end %>

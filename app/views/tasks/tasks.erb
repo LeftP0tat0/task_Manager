@@ -1,0 +1,10 @@
+<h1>Welcome, <%=@user.username%></h1>
+
+<% @tasks.each do |task| %>
+  <h3><a href="/users/<%=task.user.slug%>"><%= task.user.username %></a> </h3>
+  <p><%= task.content %></p>
+  <br></br>
+  <% end %>
+  <br></br>
+  <a href="/tasks/new">New Task</a>
+  <a href="/logout">Log Out</a>
