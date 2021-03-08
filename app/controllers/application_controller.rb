@@ -109,7 +109,7 @@ class ApplicationController < Sinatra::Base
   get '/tasks/:id' do
     if is_logged_in?
       @user = current_user
-      @tweet = Task.find_by_id(params[:id])
+      @task = Task.find_by_id(params[:id])
       erb :'/tasks/show_task'
     else
       redirect to '/login'
@@ -129,13 +129,21 @@ class ApplicationController < Sinatra::Base
 
   patch '/tasks/:id' do
     @task = Task.find_by_id(params[:id])
+    if params[:task_completed] == "on"
+      @task.update(:status => "done")
+      @task.save
+    else
+    @task.update(:status => "notdone")
+    @task.save
+    end
     if !params[:content].empty?
       @task.update(:content => params[:content])
       @task.save
-      redirect "tasks/#{params[:id]}"
+      redirect 'login'
     else
-      redirect "tasks/#{params[:id]}/edit"
+      redirect 'login'
     end
+
   end
 
   #tasks delete

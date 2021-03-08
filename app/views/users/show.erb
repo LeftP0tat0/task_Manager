@@ -4,7 +4,9 @@
 
 <ul>
   <% @user.tasks.each do |task|%>
-  <li><%= task.content %> <a href="/tasks/<%=task.id%>/edit">EDIT</a></li>
+    <% if task.status != "done" %>
+      <li><%= task.content %> <a href="/tasks/<%=task.id%>/edit">Edit</a></li>
+    <% end %>
   <% end %>
 </ul>
 
@@ -13,7 +15,7 @@
   <ul>
     <% @user.tasks.each do |task|%>
       <% if task.status == "done" %>
-        <li><%= task.content %> <a href="/tasks/<%=task.id%>/edit">EDIT</a></li>
+        <li><%= task.content %> <a href="/tasks/<%=task.id%>/edit">Edit</a></li>
       <% end %>
     <% end %>
   </ul>
