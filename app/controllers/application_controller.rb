@@ -65,6 +65,7 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by_slug(params[:slug])
     erb :'/users/show'
   end
+   
 
   get '/logout' do
     session.clear
@@ -88,7 +89,7 @@ class ApplicationController < Sinatra::Base
     if is_logged_in?
       @user = current_user
       @tasks = Task.all
-      erb :'/tasks/tasks'
+      erb :"/users/show"
     else
       redirect '/login'
     end

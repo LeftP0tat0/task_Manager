@@ -1,6 +1,6 @@
-<h1><%=@user.username%></h1>
+<h1><%=@user.username.capitalize%>'s Tasks</h1>
 
-<a href="/tasks/new">New Task</a>
+<h3>Tasks to do</h3>
 
 <ul>
   <% @user.tasks.each do |task|%>
@@ -8,4 +8,16 @@
   <% end %>
 </ul>
 
+<h3>Completed tasks</h3>
+
+  <ul>
+    <% @user.tasks.each do |task|%>
+      <% if task.status == "done" %>
+        <li><%= task.content %> <a href="/tasks/<%=task.id%>/edit">EDIT</a></li>
+      <% end %>
+    <% end %>
+  </ul>
+
+<p>_____________</p> 
+<a href="/tasks/new">New Task</a>
 <a href="/logout">Log Out</a>
