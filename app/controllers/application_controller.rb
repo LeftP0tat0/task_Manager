@@ -129,26 +129,30 @@ class ApplicationController < Sinatra::Base
 
   patch '/tasks/:id' do
     @task = Task.find_by_id(params[:id])
-    if params[:task_completed] == "on"
-      @task.update(:status => "done")
-      @task.save
+    if params[:delete] == "on"
+      redirect to "/tasks/#{params[:id]}/delete"
     else
-    @task.update(:status => "notdone")
-    @task.save
-    end
-    if !params[:content].empty?
-      @task.update(:content => params[:content])
+      if params[:task_completed] == "on"
+        @task.update(:status => "done")
+        @task.save
+      else
+      @task.update(:status => "notdone")
       @task.save
-      redirect 'login'
-    else
-      redirect 'login'
+      end
+      if !params[:content].empty?
+        @task.update(:content => params[:content])
+        @task.save
+        redirect 'login'
+      else
+        redirect 'login'
+      end
     end
 
   end
 
   #tasks delete
 
-  post '/tasks/:id/delete' do
+  get '/tasks/:id/delete' do
     @task = Task.find_by_id(params[:id])
     if current_user == @task.user
       @task.delete
